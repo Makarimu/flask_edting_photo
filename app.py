@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 import base64
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='views')
 
 # Konfigurasi
 UPLOAD_FOLDER = 'static/uploads'
