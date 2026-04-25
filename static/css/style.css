@@ -1,0 +1,408 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5a9a9a 0%, #4a8a8a 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
+    color: #ffffff;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.header p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* 2 Columns Layout */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center; /* Ini yang membuat konten di tengah vertikal */
+}
+
+/* LEFT PANEL */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Pusatkan vertikal */
+}
+
+/* Source Selection */
+.source-selection {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.source-btn {
+    padding: 12px 30px;
+    border: 2px solid rgba(90, 154, 154, 0.3);
+    background: rgba(90, 154, 154, 0.1);
+    color: #5a9a9a;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    flex: 1;
+    max-width: 150px;
+}
+
+.source-btn.active,
+.source-btn:hover {
+    background: #5a9a9a;
+    color: white;
+    border-color: #5a9a9a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 154, 154, 0.3);
+}
+
+/* Camera & Upload Section */
+.input-section {
+    margin-bottom: 0;
+}
+
+.camera-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: none;
+}
+
+.camera-container.show {
+    display: block !important;
+}
+
+#videoElement {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#canvas {
+    display: none;
+}
+
+.camera-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-size: 0.95em;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #7cb342 0%, #689f38 100%);
+    color: white;
+    flex: 1;
+    max-width: 200px;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e57373 0%, #ef5350 100%);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 115, 115, 0.4);
+}
+
+.upload-container {
+    text-align: center;
+    padding: 60px 40px;
+    border: 3px dashed rgba(90, 154, 154, 0.4);
+    border-radius: 15px;
+    background: rgba(90, 154, 154, 0.05);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-container:hover {
+    background: rgba(90, 154, 154, 0.1);
+    border-color: #5a9a9a;
+    transform: scale(1.02);
+}
+
+.upload-container input[type="file"] {
+    display: none;
+}
+
+/* Image Display - Single Image */
+.image-display {
+    width: 100%;
+    display: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: opacity 0.3s ease;
+}
+
+.image-display.show {
+    display: block;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-label {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    padding: 8px 15px;
+    background: rgba(90, 154, 154, 0.9);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+}
+
+/* Features Panel */
+.features-panel {
+    background: rgba(90, 154, 154, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(90, 154, 154, 0.2);
+    /* Hapus height: 100% jika ada */
+}
+
+.features-title {
+    font-size: 1.3em;
+    color: #5a9a9a;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid rgba(90, 154, 154, 0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.feature-item:hover {
+    border-color: #5a9a9a;
+    background: rgba(90, 154, 154, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 154, 154, 0.2);
+}
+
+.feature-item.active {
+    border-color: #5a9a9a;
+    background: linear-gradient(135deg, #5a9a9a 0%, #4a8a8a 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(90, 154, 154, 0.3);
+}
+
+.feature-item input[type="checkbox"] {
+    display: none;
+}
+
+.feature-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.feature-desc {
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.feature-item.active .feature-desc {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Sliders */
+.sliders-container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    display: block; /* Ubah dari none ke block agar selalu muncul */
+    border: 1px solid rgba(90, 154, 154, 0.2);
+}
+
+.sliders-container.show {
+    display: block;
+}
+
+.slider-group {
+    margin-bottom: 15px;
+}
+
+.slider-group:last-child {
+    margin-bottom: 0;
+}
+
+.slider-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #5a9a9a;
+    font-size: 0.95em;
+}
+
+.slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(90, 154, 154, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5a9a9a 0%, #4a8a8a 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(90, 154, 154, 0.4);
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5a9a9a 0%, #4a8a8a 100%);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(90, 154, 154, 0.4);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(90, 154, 154, 0.1); /* Garis pemisah tipis */
+}
+
+.action-buttons .btn {
+    flex: 1;
+    max-width: 150px;
+}
+
+.student-info {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(90, 154, 154, 0.1);
+    border-radius: 10px;
+    color: #5a9a9a;
+    font-weight: 500;
+    border: 1px solid rgba(90, 154, 154, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .source-selection {
+        flex-direction: column;
+    }
+    
+    .source-btn {
+        max-width: none;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}

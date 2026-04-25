@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Image Processing - UTP 2026</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Real-Time Image Processing</h1>
+        <p>UTP Praktikum Pengolahan Citra 2026</p>
+    </div>
+    
+    <div class="main-container">
+        <!-- Main Content - 2 Columns Layout -->
+        <div class="content-wrapper">
+            
+            <!-- LEFT COLUMN: Camera & Result -->
+            <div class="left-panel">
+                <!-- Source Selection -->
+                <div class="source-selection">
+                    <button class="source-btn active" onclick="switchSource('camera')">📷 Kamera</button>
+                    <button class="source-btn" onclick="switchSource('upload')">📁 Upload</button>
+                </div>
+                
+                <!-- Camera Section -->
+                <div class="input-section">
+                    <div class="camera-container show" id="cameraContainer">
+                        <video id="videoElement" autoplay playsinline></video>
+                        <canvas id="canvas"></canvas>
+                        <div class="camera-controls">
+                            <button class="btn btn-success" onclick="captureImage()">📸 Ambil Foto</button>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-container" id="uploadContainer" style="display: none;" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(event)">
+                        <div style="font-size: 3em; margin-bottom: 10px;">📁</div>
+                        <div style="font-size: 1.2em; font-weight: bold;">Klik untuk Upload Gambar</div>
+                        <div style="color: #666; margin-top: 5px;">Format: JPG, JPEG, PNG</div>
+                    </div>
+                </div>
+                
+                <!-- Result Image Display -->
+                <div class="image-display" id="imageDisplay">
+                    <div class="image-wrapper">
+                        <img id="resultImage" src="" alt="Hasil Processing">
+                        <div class="image-label">📷 Hasil Processing</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- RIGHT COLUMN: Features & Controls -->
+            <div class="right-panel">
+                <div class="features-panel">
+                    <div class="features-title">Pilih Fitur Pengolahan Citra:</div>
+                    
+                    <div class="features-grid">
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="grayscale">
+                            <div class="feature-name">Grayscale</div>
+                            <div class="feature-desc">Konversi ke abu-abu</div>
+                        </label>
+                        
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="histogram">
+                            <div class="feature-name">Histogram EQ</div>
+                            <div class="feature-desc">Perbaiki kontras</div>
+                        </label>
+                        
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="median_filter">
+                            <div class="feature-name">Median Filter</div>
+                            <div class="feature-desc">Reduksi noise</div>
+                        </label>
+                        
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="gaussian_blur">
+                            <div class="feature-name">Gaussian Blur</div>
+                            <div class="feature-desc">Efek blur halus</div>
+                        </label>
+                        
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="sharpening">
+                            <div class="feature-name">Sharpening</div>
+                            <div class="feature-desc">Pertajam gambar</div>
+                        </label>
+                        
+                        <label class="feature-item" onclick="toggleFeature(this)">
+                            <input type="checkbox" value="edge_canny">
+                            <div class="feature-name">Edge Detection</div>
+                            <div class="feature-desc">Deteksi tepi Canny</div>
+                        </label>
+                    </div>
+                    
+                    <!-- Sliders for Brightness/Contrast -->
+                    <div class="sliders-container" id="slidersContainer">
+                        <h4 style="color: #5a9a9a; margin-bottom: 15px; font-size: 1.1em;">Pengaturan Tambahan</h4>
+                        <div class="slider-group">
+                            <div class="slider-label">
+                                <span>Brightness</span>
+                                <span id="brightnessValue">0</span>
+                            </div>
+                            <input type="range" min="-100" max="100" value="0" class="slider" id="brightnessSlider" oninput="updateSliderValue('brightness', this.value)">
+                        </div>
+                        
+                        <div class="slider-group">
+                            <div class="slider-label">
+                                <span>Contrast</span>
+                                <span id="contrastValue">0</span>
+                            </div>
+                            <input type="range" min="-100" max="100" value="0" class="slider" id="contrastSlider" oninput="updateSliderValue('contrast', this.value)">
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn btn-success" onclick="resetImage()">Reset Semua</button>
+                        <button class="btn btn-danger" onclick="downloadResult()">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="student-info">
+            <strong>Nama:</strong> Makarimu Samarkandi | <strong>NPM:</strong> 065123143
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
